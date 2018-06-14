@@ -140,7 +140,6 @@ public class LogisticRegression {
             }
             parameters[i] += sigma * f;
         }
-
     }
 
     /**
@@ -204,6 +203,7 @@ public class LogisticRegression {
      */
     public static void main(String[] args) throws IOException {
         Scanner sc = new Scanner(new File("src/irisData/data.txt"));
+        String[] names = {"Iris-setosa","Iris-versicolor", "Iris-virginica"};
         List<String> list = new ArrayList<>();
         while(sc.hasNextLine()){
             list.add(sc.nextLine());
@@ -216,7 +216,7 @@ public class LogisticRegression {
             for(int i = 0; i < 4; i++){
                 train_data[idx][i] = Double.parseDouble(data[i]);
             }
-            if(data[4].equals("Iris-setosa")){
+            if(data[4].equals(names[2])){
                 label[idx] = 1;
             }else
                 label[idx] = 0;
@@ -224,7 +224,7 @@ public class LogisticRegression {
         }
 
         LogisticRegression lr = new LogisticRegression();
-        lr.train(train_data, label, 5000, true);
+        lr.train(train_data, label, 50000, true);
         double[] predict = lr.predict(train_data);
 
         lr.calcPredictError(label, predict);
